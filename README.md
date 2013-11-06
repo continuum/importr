@@ -1,8 +1,8 @@
 # Importr
 
-Rails Engine to wich extend active-admin to import excel files, based on top of [Active-Importer](https://github.com/continuum/active_importer) dsl import.
+Rails Engine which extends active-admin to import excel files, based on top of [Active-Importer](https://github.com/continuum/active_importer) dsl import.
 
-[![Build Status](https://secure.travis-ci.org/continuum/importr.png)](http://travis-ci.org/continuum/importr) [![Dependency Status](https://gemnasium.com/continuum/importr.png)](https://gemnasium.com/continuum/espinita) [![Coverage Status](https://coveralls.io/repos/continuum/importr/badge.png)](https://coveralls.io/r/continuum/importr)
+[![Build Status](https://secure.travis-ci.org/continuum/importr.png)](http://travis-ci.org/continuum/importr) [![Coverage Status](https://coveralls.io/repos/continuum/importr/badge.png)](https://coveralls.io/r/continuum/importr)
 =======
 
 ## Installation
@@ -18,13 +18,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install importr
-
-## Dependences
-
-[SideKiq](https://github.com/mperham/sidekiq)
-
-[CarrierWave](https://github.com/carrierwaveuploader/carrierwave)
-
 
 ## Usage
 
@@ -85,6 +78,11 @@ in config/initializers/faye.rb write something like
       end
     end
 
-finnaly you must to run a Faye server
+Finnaly you must to run a Faye server
 
+## Dependences
+
+[SideKiq](https://github.com/mperham/sidekiq)
+
+[CarrierWave](https://github.com/carrierwaveuploader/carrierwave)
 
