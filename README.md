@@ -1,7 +1,6 @@
 # Importr
 
-This gem adds functionality to data models so that they can import data from
-spreadsheets.
+Rails Engine to wich extend active-admin to import excel files, based on top of active-importer dsl import.
 
 ## Installation
 
@@ -17,72 +16,34 @@ Or install it yourself as:
 
     $ gem install importr
 
+## Dependences
+
+    [SideKiq](https://github.com/mperham/sidekiq)Sidekiq
+    [CarrierWave](https://github.com/carrierwaveuploader/carrierwave)carrierwave
+
+
 ## Usage
 
-Include the module and declare importers inside a data model class:
+Add an your importers in app/importers
 
-    class Employee
-      include Importr::Importable
+    class PricingImporter < Importr::Importer
+      imports Pricing
 
-      importer do |c|
-        c.column 'First Name', :first_name
-        c.column 'Last Name', :last_name
-        c.column 'Department', :department do |value|
-          Department.find_by(name: value)
-        end
-      end
+      column 'Fecha', :date
+      column 'Precio/tasa', :value
+      column 'Vector precio', :vector_id
     end
 
-Columns are declared, giving the column header expected from the spreadsheet
-file, the field to which the column corresponds.  An optional block of code or
-lambda expression can be provided to process the value from the spreadsheet
-before assigning it to the corresponding field.
+Go to active-importer documentation for more information about importers
 
-### Multiple importers
+### Active Admin support
 
-Multiple importers can be declared for each data model class, by assigning them names:
+    ActiveAdmin.register Pricing do
+      menu parent: "Money"
 
-    class Employee
-      include Importr::Importable
-
-      importer :english do |c|
-        c.column 'First Name', :first_name
-        c.column 'Last Name', :last_name
-        c.column 'Department', :department do |value|
-          Department.find_by(name: value)
-        end
-      end
-
-      importer :spanish do |c|
-        c.column 'Nombre', :first_name
-        c.column 'Apellidos', :last_name
-        c.column 'Departamento', :department do |value|
-          Department.find_by(name: value)
-        end
-      end
+      data_import_interface
     end
 
-### Custom code during import
-
-For cases when importing is not limited to merely assigning cell values to
-fields, the user can provide a custom block of code where it can work directly
-with the spreadsheet row and the model object being generated.
-
-    class Employee
-      include Importr::Importable
-
-      importer do |c|
-        c.column 'First Name', :first_name
-        c.column 'Last Name', :last_name
-        c.column 'Department', :department do |value|
-          Department.find_by(name: value)
-        end
-
-        c.custom do |row, employee|
-          # ...
-        end
-      end
-    end
 
 ### WebSocket integration
 
