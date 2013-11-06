@@ -1,7 +1,8 @@
 :javascript
   (function() {
 
-    var client = new Faye.Client("#{root_url(port: 8000)}faye", { retry: 5 });
+  
+    var client = new Faye.Client("#{websocket_url_service}", { retry: 5 });
 
     function update_row_count(message) {
       if (typeof(message.processed_rows) != 'undefined') {

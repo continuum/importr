@@ -1,6 +1,8 @@
 module Importr
   module ActiveAdmin
-
+    
+    ::ActiveAdmin::ViewHelpers.send(:include , Importr::ApplicationHelper)
+    
     def data_import_interface(importer_type = nil)
       klass = config.resource_class.name
       importer_type ||= "#{klass}Importer".constantize

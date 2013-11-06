@@ -7,7 +7,8 @@ module Importr
       yield self
     end
 
-    mattr_accessor  :web_socket_class, :web_socket_method
+    mattr_accessor  :web_socket_class, :web_socket_method, 
+                    :websocket_url_service, :websocket_client_script
 
 
   end
