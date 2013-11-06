@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Importr::VERSION
   s.authors     = ["Ernesto Garcia", "Miguel Michelson"]
   s.email       = ["gnapse@gmail.com", "miguelmichelson@gmail.com"]
-  s.homepage    = "http://todo.cl"
+  s.homepage    = "https://github.com/continuum/importr"
   s.summary     = "Full Stack rails engine for xls import to activerecord."
   s.description = "Full Stack rails engine for xls import to activerecord, with process notification through websockets, and activeadmin integration, works with rails 4.0.+."
 
