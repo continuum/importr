@@ -16,3 +16,5 @@ gemspec
 gem 'active_importer' , git: 'https://github.com/continuum/active_importer.git'
 gem 'debugger'
 gem 'sidekiq' #, "~> 2.11.2"
+
+gem 'coveralls', require: false
