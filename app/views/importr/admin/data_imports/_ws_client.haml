@@ -1,0 +1,30 @@
+:javascript
+  (function() {
+
+    var client = new Faye.Client("#{root_url(port: 8000)}faye", { retry: 5 });
+
+    function update_row_count(message) {
+      if (typeof(message.processed_rows) != 'undefined') {
+        $('#rows-processed').html('' + message.processed_rows + ' / ' + message.total_rows)
+      }
+      console.log(message)
+    }
+
+    client.subscribe("#{@data_import.websocket_channel(:base)}", function(message) {
+      update_row_count(message)
+      $("#process-status").html(message.error)
+    });
+
+    client.subscribe("#{@data_import.websocket_channel(:error)}", function(message) {
+      update_row_count(message)
+      $('#rows-with-errors').html(message.error_count)
+
+      $('#row-errors-panel tbody').append("<tr><td>" + message.index + "</td><td>" + message.error + "</td></tr>")
+      $('#row-errors-panel').show();
+    });
+
+    client.subscribe("#{@data_import.websocket_channel(:success)}", function(message) {
+      update_row_count(message)
+    });
+
+  })();

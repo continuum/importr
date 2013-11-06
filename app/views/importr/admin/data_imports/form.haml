@@ -1,0 +1,6 @@
+= semantic_form_for @data_import, url: { :action => "import_excel" } do |f|
+  = f.inputs do
+    = f.input :document, as: :file
+    = f.input :uuid, as: :hidden
+    = f.input :importer_type, as: :hidden
+  = f.submit

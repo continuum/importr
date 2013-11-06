@@ -1,0 +1,21 @@
+= javascript_include_tag "#{root_url(:port => 8000)}faye/client.js"
+= render "importr/admin/data_imports/ws_client"
+
+.attributes_table
+  %table
+    %tbody
+      %tr.row
+        %th
+          Status
+        %td#process-status
+          = @data_import.status_text
+      %tr.row
+        %th
+          Rows processed
+        %td#rows-processed
+          = @data_import.progress_text
+      %tr.row
+        %th
+          Rows with errors
+        %td#rows-with-errors
+          = @data_import.error_count_text
