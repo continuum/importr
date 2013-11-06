@@ -2,6 +2,9 @@
 
 Rails Engine to wich extend active-admin to import excel files, based on top of [Active-Importer](https://github.com/continuum/active_importer) dsl import.
 
+[![Build Status](https://secure.travis-ci.org/continuum/importr.png)](http://travis-ci.org/continuum/importr) [![Dependency Status](https://gemnasium.com/continuum/importr.png)](https://gemnasium.com/continuum/espinita) [![Coverage Status](https://coveralls.io/repos/continuum/importr/badge.png?branch=master)](https://coveralls.io/r/continuum/importr?branch=master)
+=======
+
 ## Installation
 
 Add this line to your application's Gemfile:
