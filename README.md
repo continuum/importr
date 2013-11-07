@@ -1,6 +1,6 @@
 # Importr
 
-Rails Engine which extends active-admin to import excel files, based on top of [Active-Importer](https://github.com/continuum/active_importer) dsl import.
+Extends active-admin to import excel files. Based on [Active-Importer](https://github.com/continuum/active_importer) dsl import.
 
 [![Build Status](https://secure.travis-ci.org/continuum/importr.png)](http://travis-ci.org/continuum/importr) [![Coverage Status](https://coveralls.io/repos/continuum/importr/badge.png)](https://coveralls.io/r/continuum/importr)
 =======
@@ -11,21 +11,21 @@ Add this line to your application's Gemfile:
 
     gem 'importr'
 
-And then execute:
+Then execute:
 
     $ bundle
 
-Or install it yourself as:
+Or just install it as gem if you don't use bundler:
 
     $ gem install importr
 
 ## Usage
 
-Install migrations
+Install migrations:
 
     $ rake importr:install:migrations
 
-Add an your importers in app/importers
+Add your importers in app/importers. Here is a importer example:
 
     class PricingImporter < Importr::Importer
       imports Pricing
@@ -35,7 +35,7 @@ Add an your importers in app/importers
       column 'Vector precio', :vector_id
     end
 
-Go to active-importer documentation for more information about importers
+Go to [Active-Importer](https://github.com/continuum/active_importer) documentation for more information about importers
 
 ### Active Admin support
 
@@ -47,7 +47,9 @@ Go to active-importer documentation for more information about importers
 
 ### WebSocket integration, Faye example
 
-If you need to emit the progress of importation in realtime, like errors validations, you can configure the Importer in an initializer for websocket notification:
+If you need to notify the progress of a import in real time (and
+errors or validation issues), you can configure websocket notification
+in an initializer:
 
 
     Importr::Config.setup do |config|
@@ -57,11 +59,11 @@ If you need to emit the progress of importation in realtime, like errors validat
       config.websocket_client_script  = "http://localhost:8000/faye/client.js"
     end
 
-Importr will manage the event publication for errors send notifications with FayeWrapper.publish
+Importr will manage the event publication for errors and send notifications with FayeWrapper.publish.
 
 ### Faye Wrapper example
 
-in config/initializers/faye.rb write something like
+In config/initializers/faye.rb write something like
 
     WS_CLIENT = Faye::Client.new('http://localhost:8000/faye')
 
@@ -78,11 +80,16 @@ in config/initializers/faye.rb write something like
       end
     end
 
-Finnaly you must to run a Faye server
+Finnaly you must to run a Faye websocket server
 
-## Dependences
+## Dependencies
 
 [SideKiq](https://github.com/mperham/sidekiq)
 
 [CarrierWave](https://github.com/carrierwaveuploader/carrierwave)
 
+## Maintainers
+* Miguel Michelson [github/michelson](https://github.com/michelson)
+* Ernesto García [github/gnapse](https://github.com/gnapse)
+
+Copyright (c) 2013 continuum, released under the MIT license
