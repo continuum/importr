@@ -35,7 +35,7 @@ Add your importers in app/importers. Here is a importer example:
       column 'Vector precio', :vector_id
     end
 
-Go to active-importer documentation for more information about importers
+Go to [Active-Importer](https://github.com/continuum/active_importer) documentation for more information about importers
 
 ### Active Admin support
 
@@ -80,10 +80,16 @@ In config/initializers/faye.rb write something like
       end
     end
 
-Finnaly you must to run a Faye server
+Finnaly you must to run a Faye websocket server
 
 ## Dependencies
 
 [SideKiq](https://github.com/mperham/sidekiq)
 
 [CarrierWave](https://github.com/carrierwaveuploader/carrierwave)
+
+## Maintainers
+* Miguel Michelson [github/michelson](https://github.com/michelson)
+* Ernesto García [github/gnapse](https://github.com/gnapse)
+
+Copyright (c) 2013 continuum, released under the MIT license
