@@ -14,24 +14,21 @@ module Importr
 
     alias_method :data_import, :context
 
-    def row_success
-      super
+    on :row_success do
       update_counters
       notify(:success, @counters)
     end
 
-    def row_error(error_message)
-      super
+    on :row_error do |e|
       update_counters
-      notify(:error, @counters.merge(index: row_index, error: error_message))
+      notify(:error, @counters.merge(index: row_index, error: e.message))
     end
 
-    def import_failed(error_message)
-      super
-      notify(:base, error: error_message)
+    on :import_failed do |e|
+      notify(:base, error: e.message)
     end
 
-    def import_finished
+    on :import_finished do
       data_import.update_attribute(:finished, true) if data_import
     end
 
