@@ -1,12 +1,17 @@
 :javascript
   (function() {
-
-  
     var client = new Faye.Client("#{websocket_url_service}", { retry: 5 });
+
+    var max = {
+      processed_rows: 0,
+      success_count: 0,
+      error_count: 0,
+    };
 
     function update_row_count(message) {
       if (typeof(message.processed_rows) != 'undefined') {
-        $('#rows-processed').html('' + message.processed_rows + ' / ' + message.total_rows)
+        max.processed_rows = Math.max(message.processed_rows, max.processed_rows)
+        $('#rows-processed').html('' + max.processed_rows + ' / ' + message.total_rows)
       }
       console.log(message)
     }
@@ -18,13 +23,15 @@
 
     client.subscribe("#{@data_import.websocket_channel(:error)}", function(message) {
       update_row_count(message)
-      $('#rows-with-errors').html(message.error_count)
+      max.error_count = Math.max(message.error_count, max.error_count)
+      $('#rows-with-errors').html(max.error_count)
 
       $('#row-errors-panel tbody').append("<tr><td>" + message.index + "</td><td>" + message.error + "</td></tr>")
       $('#row-errors-panel').show();
     });
 
     client.subscribe("#{@data_import.websocket_channel(:success)}", function(message) {
+      max.success_count = Math.max(message.success_count, max.success_count)
       update_row_count(message)
     });
 

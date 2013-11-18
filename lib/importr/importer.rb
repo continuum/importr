@@ -20,7 +20,7 @@ module Importr
     end
 
     on :row_error do |e|
-      update_counters
+      update_counters({index: row_index, error: e.message})
       notify(:error, @counters.merge(index: row_index, error: e.message))
     end
 
@@ -39,14 +39,21 @@ module Importr
       Importr::Notifier.notify(channel, message)
     end
 
-    def update_counters
+    def update_counters(err= {})
       @counters = {
         success_count: row_success_count,
         error_count: row_error_count,
         processed_rows: row_processed_count,
         total_rows: row_count,
       }
-      data_import.update_attributes(@counters) if data_import
+      if data_import
+        data_import.update_attributes(@counters) 
+        add_error(err) unless err.blank?
+      end
+    end
+
+    def add_error(err)
+      data_import.update_attributes(error_messages: data_import.error_messages << err ) if data_import
     end
   end
 end

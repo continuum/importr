@@ -5,5 +5,10 @@
         Row Number
       %th
         Error Messages
+
   %tbody
     %tr
+      - @data_import.error_messages.each do |err|
+        %td= err
+
+

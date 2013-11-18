@@ -8,7 +8,7 @@ module Importr
       importer_type ||= "#{klass}Importer".constantize
 
       action_item :only => :index do
-        link_to 'Import from Excel', :action => 'upload_excel'
+        link_to 'Import from Excel', :action => 'upload_excel' #if current_admin_user.is_admin?
       end
 
       collection_action :upload_excel do
@@ -27,8 +27,14 @@ module Importr
       end
 
       controller do
-        def permitted_params
-          params.permit data_import: [:document, :uuid, :importer_type]
+        before_filter :check_permisions, only: [:import_excel, :upload_excel]
+        
+        def check_permisions
+          self.send(Importr::Config.restriction_method.to_sym) unless Importr::Config.restriction_method.blank?
+        end
+
+        def importer_params
+          {data_import: [:document, :uuid, :importer_type]}
         end
       end
     end

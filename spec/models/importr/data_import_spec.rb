@@ -40,6 +40,31 @@ module Importr
       end
     end
 
+    describe "build data import with file with errors" do
+
+      let(:model){
+        build_data_import.document = File.open(File.join(Rails.root, '/spec/fixtures/doc-with-errors.xlsx'))
+        build_data_import.importer_type = "SomeImporter"
+        build_data_import.resource_type = "GeneralModel"
+        build_data_import
+      }
+
+      it "should have file" do
+        model.save
+        expect(model.document.url).not_to be_blank
+      end
+
+      it "should have many associated models" do
+        expect( lambda{ model.save } ).to change{GeneralModel.count}
+      end
+
+      it "should have one error" do 
+        model.save
+        model.reload
+        expect( model ).to have(1).error_messages
+      end
+    end
+
 
 
   end
