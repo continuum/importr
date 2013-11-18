@@ -11,14 +11,6 @@ Add this line to your application's Gemfile:
 
     gem 'importr'
 
-Then execute:
-
-    $ bundle
-
-Or just install it as gem if you don't use bundler:
-
-    $ gem install importr
-
 ## Usage
 
 Install migrations:
@@ -45,7 +37,23 @@ Go to [Active-Importer](https://github.com/continuum/active_importer) documentat
     end
 
 
-### WebSocket integration, Faye example
+### Access restriction
+
+To restrict access to the import data actions you need to supply restriction_method in importr config, example:
+
+#### config/importr.rb
+
+    Importr::Config.setup do |config|
+      config.restriction_method       = "check_importr_roles"
+    end 
+
+#### appplication_controller.rb
+
+    def check_importr_roles
+      raise CanCan::AccessDenied unless current_admin_user.is_admin?
+    end
+
+## WebSocket integration, Faye example
 
 If you need to notify the progress of a import in real time (and
 errors or validation issues), you can configure websocket notification
