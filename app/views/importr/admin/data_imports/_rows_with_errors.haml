@@ -7,8 +7,10 @@
         Error Messages
 
   %tbody
-    %tr
-      - @data_import.error_messages.each do |err|
-        %td= err
+    
+    - @data_import.error_messages.each do |err|
+      %tr
+        %td= err[:index]
+        %td= err[:error]
 
 
