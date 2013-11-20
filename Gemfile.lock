@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    importr (0.0.3)
+    importr (0.0.4)
       active_importer (~> 0.2.4)
       carrierwave
       haml
