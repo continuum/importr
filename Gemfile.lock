@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     importr (0.0.3)
-      active_importer (~> 0.2.0)
+      active_importer (~> 0.2.4)
       carrierwave
       haml
       rails (~> 4.0.1.rc3)
@@ -20,7 +20,7 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    active_importer (0.2.1)
+    active_importer (0.2.4)
       roo
     activemodel (4.0.1)
       activesupport (= 4.0.1)
