@@ -12,11 +12,12 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/continuum/importr"
   s.summary     = "Full Stack rails engine for xls import to activerecord."
   s.description = "Full Stack rails engine for xls import to activerecord, with process notification through websockets, and activeadmin integration, works with rails 4.0.+."
+  s.license     = 'MIT'
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.0.1.rc3"
+  s.add_dependency "rails", "~> 4.0.0"
   s.add_dependency "active_importer", "~> 0.2.4"
   s.add_dependency "carrierwave"
   s.add_dependency "haml"

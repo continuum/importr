@@ -1,0 +1,45 @@
+:javascript
+  function doPoll(){
+
+    $.get("#{request.path}.json", function(data) {
+        render_progress(data) // process results here
+        render_errors(data) // render errors lists
+        render_error_rows(data) // render error rows
+        if(!data.finished){
+          setTimeout(doPoll, 500);  
+        }
+
+    });
+  }
+
+  function render_progress(data){
+    
+    width = (data.processed_rows/data.total_rows)*100
+    if(isNaN(width)){
+      $(".meter span").css("width", "0%" )
+    }else{
+      $(".meter span").css("width", width + "%" )  
+    }
+    
+    if( data.error_count > 0){
+      $(".meter").addClass("red")
+    }
+  }
+
+  function render_errors(data){
+    $('#rows-processed').html('' + data.processed_rows + ' / ' + data.total_rows)
+  }
+
+  function render_error_rows(data){
+    $('#rows-with-errors').html(data.error_count)
+    $('#row-errors-panel tbody').html("")
+
+    $.each(data.error_messages, function( index, value ) {
+      //alert( index + ": " + value );
+      $('#row-errors-panel tbody').append("<tr><td>" + value.index + "</td><td>" + value.error + "</td></tr>")
+    });
+
+    $('#row-errors-panel').show();
+  }
+
+  doPoll()

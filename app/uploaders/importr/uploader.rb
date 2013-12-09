@@ -9,7 +9,8 @@ module Importr
     end
 
     def importer(new_file)
-      Importr::Worker.perform_in(5.seconds, model.id)
+      #Importr::Worker.perform_in(5.seconds, model.id)
+      Importr::Worker.perform_async(model.id)
     end
   end
 end

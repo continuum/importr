@@ -1,5 +1,10 @@
-= javascript_include_tag "#{websocket_client_script}"
-= render "importr/admin/data_imports/ws_client"
+
+- if websocket_configured?
+  = javascript_include_tag "#{websocket_client_script}"
+  = render "importr/admin/data_imports/ws_client"
+- else
+  = render "importr/admin/data_imports/poll"
+
 
 .attributes_table
   %table
@@ -14,6 +19,9 @@
           Rows processed
         %td#rows-processed
           = @data_import.progress_text
+      %tr.row
+        .meter.animate
+          %span{ style: "width: #{calculate_progress(@data_import)}%" }
       %tr.row
         %th
           Rows with errors

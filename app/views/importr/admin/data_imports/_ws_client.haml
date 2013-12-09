@@ -8,12 +8,25 @@
       error_count: 0,
     };
 
+
+    function render_progress(data){
+    
+      width = (data.processed_rows/data.total_rows)*100
+      
+      $(".meter span").css("width", width + "%" )  
+      
+      if( data.error_count > 0){
+        $(".meter").addClass("red")
+      }
+    }
+
     function update_row_count(message) {
       if (typeof(message.processed_rows) != 'undefined') {
         max.processed_rows = Math.max(message.processed_rows, max.processed_rows)
         $('#rows-processed').html('' + max.processed_rows + ' / ' + message.total_rows)
+        render_progress(max)
       }
-      console.log(message)
+      //console.log(message)
     }
 
     client.subscribe("#{@data_import.websocket_channel(:base)}", function(message) {

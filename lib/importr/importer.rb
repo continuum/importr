@@ -28,10 +28,6 @@ module Importr
       notify(:base, error: e.message)
     end
 
-    on :import_aborted do |message|
-      notify(:base, error: message)
-    end
-
     on :import_finished do
       data_import.update_attribute(:finished, true) if data_import
     end
@@ -51,7 +47,7 @@ module Importr
         total_rows: row_count,
       }
       if data_import
-        data_import.update_attributes(@counters)
+        data_import.update_attributes(@counters) 
         add_error(err) unless err.blank?
       end
     end

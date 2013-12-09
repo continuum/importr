@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    importr (0.0.4)
+    importr (0.0.2)
       active_importer (~> 0.2.4)
       carrierwave
       haml
-      rails (~> 4.0.1.rc3)
+      rails (~> 4.0.0)
       roo
 
 GEM
@@ -146,9 +146,9 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
-    spreadsheet (0.9.4)
+    spreadsheet (0.9.5)
       ruby-ole (>= 1.0)
-    sprockets (2.10.0)
+    sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
