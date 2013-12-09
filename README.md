@@ -55,10 +55,8 @@ To restrict access to the import data actions you need to supply restriction_met
 
 ## WebSocket integration, Faye example
 
-If you need to notify the progress of a import in real time (and
-errors or validation issues), you can configure websocket notification
-in an initializer:
 
+There are two ways to notify progress, errors and validation messages of an import; by default Importr uses Ajax Poll strategy. If you need to notify the progress more smoothly, you can configure websocket notification in an initializer:
 
     Importr::Config.setup do |config|
       config.web_socket_class         = 'FayeWrapper'
@@ -67,7 +65,7 @@ in an initializer:
       config.websocket_client_script  = "http://localhost:8000/faye/client.js"
     end
 
-Importr will manage the event publication for errors and send notifications with FayeWrapper.publish.
+Importr will manage the event publication for errors and send notifications with web_socket_class.publish method.
 
 ### Faye Wrapper example
 
